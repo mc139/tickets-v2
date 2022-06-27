@@ -1,5 +1,6 @@
 package com.tickets.ticketsv2.service;
 
+import com.tickets.ticketsv2.command.CreateTicketCommand;
 import com.tickets.ticketsv2.config.TicketProperties;
 import com.tickets.ticketsv2.exception.ExceededAmountOfPointException;
 import com.tickets.ticketsv2.exception.PeselNotFoundException;
@@ -28,6 +29,7 @@ public class TicketService {
     private final PersonService personService;
     private final MailService mailService;
     private final TicketProperties ticketProperties;
+    private final TrafficOffenceService trafficOffenseService;
 
     public List<Ticket> getAllTickets() {
         return ticketRepository.findAll();
@@ -37,22 +39,30 @@ public class TicketService {
         return ticketRepository.findAllByPesel(pesel);
     }
 
+    public Ticket mapCommandToTicket(CreateTicketCommand createTicketCommand) {
+        Ticket ticket = new Ticket();
+        ticket.setPesel(createTicketCommand.getPesel());
+        ticket.setLocalDate(createTicketCommand.getLocalDate());
+        ticket.setTrafficOffenceSet(trafficOffenseService.mapIdToEntity(createTicketCommand.getTrafficOffensesId()));
+        return ticket;
+    }
+
     public int getTotalNumberOfPersonPoints(String pesel) {
         return getAllTickets(pesel).stream()
-                .mapToInt(ticket -> ticket.getTrafficOffenceList()
+                .mapToInt(ticket -> ticket.getTrafficOffenceSet()
                         .stream()
                         .mapToInt(TrafficOffence::getNumberOfPoints).sum())
                 .sum();
     }
 
     public int getTotalNumberOfPointsFromTicket(Ticket ticket) {
-        return ticket.getTrafficOffenceList().stream()
+        return ticket.getTrafficOffenceSet().stream()
                 .mapToInt(TrafficOffence::getNumberOfPoints)
                 .sum();
     }
 
     public int getTotalTicketPrice(Ticket ticket) {
-        Set<TrafficOffence> trafficOffenceList = ticket.getTrafficOffenceList();
+        Set<TrafficOffence> trafficOffenceList = ticket.getTrafficOffenceSet();
         return trafficOffenceList.stream().mapToInt(TrafficOffence::getTicketValue).sum();
     }
 
@@ -62,7 +72,7 @@ public class TicketService {
 
     @Transactional(rollbackFor = Throwable.class)
     public Ticket save(Ticket ticket) {
-        if (getTotalNumberOfPersonPoints(ticket.getPesel()) >= ticketProperties.getMaxPointsPerYear()){
+        if (getTotalNumberOfPersonPoints(ticket.getPesel()) >= ticketProperties.getMaxPointsPerYear()) {
             throw new ExceededAmountOfPointException("Person has already lost a driving licence cannot make another ticket!");
         }
         if (!personService.isPeselInDataBase(ticket.getPesel())) {
@@ -87,7 +97,7 @@ public class TicketService {
         return ticketRepository.findAllByPesel(pesel).stream()
                 .filter(Objects::nonNull)
                 .filter(c -> c.getLocalDate().isAfter(LocalDate.now().minusYears(1)))
-                .mapToInt(c -> c.getTrafficOffenceList()
+                .mapToInt(c -> c.getTrafficOffenceSet()
                         .stream()
                         .filter(Objects::nonNull)
                         .mapToInt(TrafficOffence::getNumberOfPoints)

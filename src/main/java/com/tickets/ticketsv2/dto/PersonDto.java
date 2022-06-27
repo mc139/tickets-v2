@@ -20,7 +20,7 @@ public class PersonDto implements Serializable {
     @Email
     private final String email;
 
-    public static PersonDto fromEntity(Person person){
+    public static PersonDto fromEntity(Person person) {
         return PersonDto.builder()
                 .id(person.getId())
                 .pesel(person.getPesel())
