@@ -1,6 +1,5 @@
 package com.tickets.ticketsv2.dto;
 
-import com.tickets.ticketsv2.model.Person;
 import com.tickets.ticketsv2.model.TrafficOffence;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +18,7 @@ public class TrafficOffenceDto implements Serializable {
     private final int ticketValue;
     private final String offenceType;
 
-    public static TrafficOffenceDto fromEntity(TrafficOffence trafficOffence){
+    public static TrafficOffenceDto fromEntity(TrafficOffence trafficOffence) {
         return TrafficOffenceDto.builder()
                 .id(trafficOffence.getId())
                 .numberOfPoints(trafficOffence.getTicketValue())

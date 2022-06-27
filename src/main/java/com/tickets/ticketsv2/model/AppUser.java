@@ -6,11 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 //todo configure app user with Spring security should implement userDetails interface
-public class AppUser{
+public class AppUser {
 
 
     @Id

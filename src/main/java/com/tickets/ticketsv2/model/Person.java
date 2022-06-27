@@ -1,6 +1,5 @@
 package com.tickets.ticketsv2.model;
 
-
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Length;
@@ -24,12 +23,16 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @PESEL
     private String pesel;
+
     @Length(min = 3, max = 20)
     private String name;
+
     @Length(min = 3, max = 20)
     private String surname;
+
     @Email
     private String email;
 

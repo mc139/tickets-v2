@@ -1,11 +1,9 @@
 package com.tickets.ticketsv2.command;
 
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.pl.PESEL;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -15,7 +13,6 @@ import java.util.Set;
 @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
-
 public class CreateTicketCommand {
 
     @PESEL
@@ -30,4 +27,5 @@ public class CreateTicketCommand {
     private int totalTicketPrice;
 
     private Set<Long> trafficOffensesId = new HashSet<>();
+
 }

@@ -1,14 +1,12 @@
 package com.tickets.ticketsv2.service;
 
 import com.tickets.ticketsv2.exception.PersonNotFoundException;
-import com.tickets.ticketsv2.exception.PeselNotFoundException;
 import com.tickets.ticketsv2.model.Person;
 import com.tickets.ticketsv2.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +23,7 @@ public class PersonService {
     }
 
     public Person findPersonById(Long id) {
-        return personRepository.findById(id).orElseThrow(()-> new PersonNotFoundException("Person dazynt egzist"));
+        return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person dazynt egzist"));
     }
 
     public void deletePerson(Long id) {
@@ -33,8 +31,8 @@ public class PersonService {
     }
 
     public Person findPersonByPesel(String pesel) {
-       return personRepository.findByPesel(pesel)
-               .orElseThrow(()-> new PersonNotFoundException("Person with pesel " + pesel + " doesn't exists!"));
+        return personRepository.findByPesel(pesel)
+                .orElseThrow(() -> new PersonNotFoundException("Person with pesel " + pesel + " doesn't exists!"));
     }
 
     public boolean isPeselInDataBase(String pesel) {
