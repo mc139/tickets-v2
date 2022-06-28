@@ -5,6 +5,8 @@ import com.tickets.ticketsv2.dto.PersonDto;
 import com.tickets.ticketsv2.model.Person;
 import com.tickets.ticketsv2.service.PersonService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -37,6 +39,14 @@ public class PersonController {
         person.setSurname(createPersonCommand.getSurname());
         person.setEmail(createPersonCommand.getEmail());
         return PersonDto.fromEntity(personService.save(person));
+    }
+
+    //todo to be checked by others
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonDto> updatePerson(CreatePersonCommand personCommand,@PathVariable Long id){
+        Person person = personService.updatePerson(personCommand, id);
+
+        return new ResponseEntity<>(PersonDto.fromEntity(person), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

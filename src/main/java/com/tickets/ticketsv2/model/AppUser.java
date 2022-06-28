@@ -25,7 +25,6 @@ public class AppUser {
         this.password = password;
         this.role = role;
     }
-
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return Collections.singleton(new SimpleGrantedAuthority(role));

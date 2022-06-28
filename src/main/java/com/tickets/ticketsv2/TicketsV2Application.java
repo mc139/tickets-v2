@@ -10,6 +10,6 @@ public class TicketsV2Application {
         SpringApplication.run(TicketsV2Application.class, args);
     }
 
-    // TODO: 27.06.2022 INTERNACJONALIZACJA I18n W WYJATKACH
+    // TODO: 27.06.2022 Internationalization i18n in exceptions
 
 }

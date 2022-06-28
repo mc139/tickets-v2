@@ -1,5 +1,7 @@
 package com.tickets.ticketsv2.service;
 
+import com.tickets.ticketsv2.command.CreatePersonCommand;
+import com.tickets.ticketsv2.dto.PersonDto;
 import com.tickets.ticketsv2.exception.PersonNotFoundException;
 import com.tickets.ticketsv2.model.Person;
 import com.tickets.ticketsv2.repository.PersonRepository;
@@ -39,4 +41,14 @@ public class PersonService {
         return personRepository.findByPesel(pesel).isPresent();
     }
 
+    public Person updatePerson(CreatePersonCommand createPersonCommand, Long id) {
+        Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Could not find a person with id : " + id));
+
+        person.setName(createPersonCommand.getName());
+        person.setSurname(createPersonCommand.getSurname());
+        person.setEmail(createPersonCommand.getEmail());
+        person.setPesel(createPersonCommand.getPesel());
+
+        return personRepository.save(person);
+    }
 }
