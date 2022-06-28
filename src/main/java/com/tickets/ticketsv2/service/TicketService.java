@@ -42,7 +42,7 @@ public class TicketService {
     public Ticket mapCommandToTicket(CreateTicketCommand createTicketCommand) {
         Ticket ticket = new Ticket();
         ticket.setPesel(createTicketCommand.getPesel());
-        ticket.setLocalDate(createTicketCommand.getLocalDate());
+        ticket.setTicket_date(createTicketCommand.getLocalDate());
         ticket.setTrafficOffenceSet(trafficOffenseService.mapIdToEntity(createTicketCommand.getTrafficOffensesId()));
         return ticket;
     }
@@ -96,7 +96,7 @@ public class TicketService {
     public int countPointsFromCurrentYear(String pesel) {
         return ticketRepository.findAllByPesel(pesel).stream()
                 .filter(Objects::nonNull)
-                .filter(c -> c.getLocalDate().isAfter(LocalDate.now().minusYears(1)))
+                .filter(c -> c.getTicket_date().isAfter(LocalDate.now().minusYears(1)))
                 .mapToInt(c -> c.getTrafficOffenceSet()
                         .stream()
                         .filter(Objects::nonNull)

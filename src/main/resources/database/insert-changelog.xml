@@ -1,0 +1,37 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+
+<changeSet  author="test"  id="1">
+    <insert
+            tableName="PERSON">
+        <column  name="id"  value="1"/>
+        <column  name="pesel"  value="75032773538"/>
+        <column  name="name"  value="Adam"/>
+        <column  name="surname"  value="Kowalski"/>
+        <column  name="email"  value="Kowalski@gmail.com"/>
+    </insert>
+
+<insert
+            tableName="TICKET">
+        <column  name="id"  value="1"/>
+        <column  name="pesel"  value="75032773538"/>
+        <column  name="ticket_date"  value="2022-06-28"/>
+        <column  name="total_ticket_price"  value="100"/>
+    </insert>
+
+<insert
+            tableName="TRAFFIC_OFFENCE">
+        <column  name="id"  value="1"/>
+        <column  name="number_of_points"  value="10"/>
+        <column  name="ticket_value"  value="100"/>
+        <column  name="offence_type"  value="Nasral"/>
+        <column  name="ticket_id"  value="1"/>
+    </insert>
+</changeSet>
+
+</databaseChangeLog>

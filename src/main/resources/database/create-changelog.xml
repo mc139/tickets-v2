@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1656436212008-1" author="jakub (generated)">
+        <createTable tableName="person">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_person"/>
+            </column>
+            <column name="pesel" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="surname" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1656436212008-2" author="jakub (generated)">
+        <createTable tableName="ticket">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ticket"/>
+            </column>
+            <column name="pesel" type="VARCHAR(255)"/>
+            <column name="ticket_date" type="DATE"/>
+            <column name="total_ticket_price" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1656436212008-3" author="jakub (generated)">
+        <createTable tableName="traffic_offence">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_trafficoffence"/>
+            </column>
+            <column name="number_of_points" type="INT"/>
+            <column name="ticket_value" type="INT"/>
+            <column name="offence_type" type="VARCHAR(255)"/>
+            <column name="ticket_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1656436212008-4" author="jakub (generated)">
+        <addForeignKeyConstraint baseColumnNames="ticket_id" baseTableName="traffic_offence"
+                                 constraintName="FK_TRAFFICOFFENCE_ON_TICKET" referencedColumnNames="id"
+                                 referencedTableName="ticket"/>
+    </changeSet>
+
+</databaseChangeLog>

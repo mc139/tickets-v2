@@ -24,7 +24,7 @@ public class TicketDto implements Serializable {
         return TicketDto.builder()
                 .id(ticket.getId())
                 .pesel(ticket.getPesel())
-                .localDate(ticket.getLocalDate())
+                .localDate(ticket.getTicket_date())
                 .totalTicketPrice(ticket.getTotalTicketPrice())
                 .trafficOffenceSet(ticket.getTrafficOffenceSet().stream()
                         .map(TrafficOffenceDto::fromEntity)

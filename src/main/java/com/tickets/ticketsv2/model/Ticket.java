@@ -30,11 +30,12 @@ public class Ticket {
     @NonNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @PastOrPresent
-    private LocalDate localDate;
+    private LocalDate ticket_date;
 
     private int totalTicketPrice;
 
     @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "ticket_id")
     private Set<TrafficOffence> trafficOffenceSet = new HashSet<>();
 
 }
