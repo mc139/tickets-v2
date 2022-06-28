@@ -25,7 +25,7 @@ public class PersonService {
     }
 
     public Person findPersonById(Long id) {
-        return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person dazynt egzist"));
+        return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person with id: "+ id + "doesn't exist"));
     }
 
     public void deletePerson(Long id) {
