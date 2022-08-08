@@ -29,7 +29,7 @@
         <column  name="id"  value="1"/>
         <column  name="number_of_points"  value="10"/>
         <column  name="ticket_value"  value="100"/>
-        <column  name="offence_type"  value="Nasral"/>
+        <column  name="offence_type"  value="SPEEDING"/>
         <column  name="ticket_id"  value="1"/>
     </insert>
 </changeSet>
